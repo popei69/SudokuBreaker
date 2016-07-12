@@ -58,12 +58,8 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         solveButton.enabled = false
         
+        // TODO: Dispatch on another thread
         solver.findSolution()
-        
-        while solver.isProcessing {
-            // wait
-            
-        }
         
         if solver.isResolved {
             print("Success")

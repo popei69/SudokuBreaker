@@ -14,7 +14,19 @@
 		140FEE4E1D2DB557006CEA3C /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FEE451D2DB557006CEA3C /* GridViewController.swift */; };
 		140FEE4F1D2DB557006CEA3C /* GridCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FEE471D2DB557006CEA3C /* GridCollectionCell.swift */; };
 		140FEE501D2DB557006CEA3C /* Solver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FEE491D2DB557006CEA3C /* Solver.swift */; };
+		14D5F0091D35914B0059F516 /* SudokuBreakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5F0081D35914B0059F516 /* SudokuBreakerTests.swift */; };
+		14D5F0101D3591BC0059F516 /* Solver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FEE491D2DB557006CEA3C /* Solver.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14D5F00B1D35914B0059F516 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140FEE151D2D9F89006CEA3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 140FEE1C1D2D9F89006CEA3C;
+			remoteInfo = SudokuBreaker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		140FEE1D1D2D9F89006CEA3C /* SudokuBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,10 +38,20 @@
 		140FEE451D2DB557006CEA3C /* GridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		140FEE471D2DB557006CEA3C /* GridCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCollectionCell.swift; sourceTree = "<group>"; };
 		140FEE491D2DB557006CEA3C /* Solver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solver.swift; sourceTree = "<group>"; };
+		14D5F0061D35914B0059F516 /* SudokuBreakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuBreakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14D5F0081D35914B0059F516 /* SudokuBreakerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBreakerTests.swift; sourceTree = "<group>"; };
+		14D5F00A1D35914B0059F516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		140FEE1A1D2D9F89006CEA3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14D5F0031D35914B0059F516 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				140FEE1F1D2D9F89006CEA3C /* SudokuBreaker */,
+				14D5F0071D35914B0059F516 /* SudokuBreakerTests */,
 				140FEE1E1D2D9F89006CEA3C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				140FEE1D1D2D9F89006CEA3C /* SudokuBreaker.app */,
+				14D5F0061D35914B0059F516 /* SudokuBreakerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +131,15 @@
 			path = SudokuBreaker/Model;
 			sourceTree = SOURCE_ROOT;
 		};
+		14D5F0071D35914B0059F516 /* SudokuBreakerTests */ = {
+			isa = PBXGroup;
+			children = (
+				14D5F0081D35914B0059F516 /* SudokuBreakerTests.swift */,
+				14D5F00A1D35914B0059F516 /* Info.plist */,
+			);
+			path = SudokuBreakerTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -127,6 +160,24 @@
 			productReference = 140FEE1D1D2D9F89006CEA3C /* SudokuBreaker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		14D5F0051D35914B0059F516 /* SudokuBreakerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14D5F00F1D35914B0059F516 /* Build configuration list for PBXNativeTarget "SudokuBreakerTests" */;
+			buildPhases = (
+				14D5F0021D35914B0059F516 /* Sources */,
+				14D5F0031D35914B0059F516 /* Frameworks */,
+				14D5F0041D35914B0059F516 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14D5F00C1D35914B0059F516 /* PBXTargetDependency */,
+			);
+			name = SudokuBreakerTests;
+			productName = SudokuBreakerTests;
+			productReference = 14D5F0061D35914B0059F516 /* SudokuBreakerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -139,6 +190,10 @@
 				TargetAttributes = {
 					140FEE1C1D2D9F89006CEA3C = {
 						CreatedOnToolsVersion = 7.3.1;
+					};
+					14D5F0051D35914B0059F516 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 140FEE1C1D2D9F89006CEA3C;
 					};
 				};
 			};
@@ -156,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				140FEE1C1D2D9F89006CEA3C /* SudokuBreaker */,
+				14D5F0051D35914B0059F516 /* SudokuBreakerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -168,6 +224,13 @@
 				140FEE4D1D2DB557006CEA3C /* Main.storyboard in Resources */,
 				140FEE4B1D2DB557006CEA3C /* Assets.xcassets in Resources */,
 				140FEE4C1D2DB557006CEA3C /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14D5F0041D35914B0059F516 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +248,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14D5F0021D35914B0059F516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14D5F0101D3591BC0059F516 /* Solver.swift in Sources */,
+				14D5F0091D35914B0059F516 /* SudokuBreakerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14D5F00C1D35914B0059F516 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 140FEE1C1D2D9F89006CEA3C /* SudokuBreaker */;
+			targetProxy = 14D5F00B1D35914B0059F516 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		140FEE401D2DB557006CEA3C /* LaunchScreen.storyboard */ = {
@@ -317,6 +397,30 @@
 			};
 			name = Release;
 		};
+		14D5F00D1D35914B0059F516 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SudokuBreakerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fr.benoitpasquier.SudokuBreakerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SudokuBreaker.app/SudokuBreaker";
+			};
+			name = Debug;
+		};
+		14D5F00E1D35914B0059F516 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SudokuBreakerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fr.benoitpasquier.SudokuBreakerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SudokuBreaker.app/SudokuBreaker";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -337,6 +441,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		14D5F00F1D35914B0059F516 /* Build configuration list for PBXNativeTarget "SudokuBreakerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14D5F00D1D35914B0059F516 /* Debug */,
+				14D5F00E1D35914B0059F516 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
