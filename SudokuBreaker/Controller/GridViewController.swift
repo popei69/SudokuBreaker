@@ -42,14 +42,15 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewWillAppear(animated)
         
         // define a square
-        let width : CGFloat = self.view.frame.width - 30
+        let width : CGFloat = self.view.frame.width - 40
         heightConstraint.constant = width
-        
+
         cellWidth = (width - (8 * 5)) / 9
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 4
+        flowLayout.minimumInteritemSpacing = 5
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
         gridCollectionView.setCollectionViewLayout(flowLayout, animated: false)
-        
     }
     
     
@@ -71,10 +72,24 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
             gridCollectionView.reloadData()
         }
     }
+    
+    @IBAction func clearAction(sender: AnyObject) {
+        
+        solver.clearAll()
+        self.grid = solver.grid
+        gridCollectionView.reloadData()
+        solveButton.enabled = true
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gridCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - Collection Delegate & DataSource
@@ -94,8 +109,22 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GridCollectionCell", forIndexPath: indexPath) as! GridCollectionCell
         
         if let value = solver.valueAtPosition(indexPath.row) {
-            cell.valueLabel.text = "\(value)"
+            
+            if solver.isResolved && value == 0 {
+                
+                if let solutionValue = solver.solutionValueAtPosition(indexPath.row) {
+                    cell.valueLabel.text = "\(solutionValue)"
+                    cell.valueLabel.textColor = UIColor.redColor()
+                } else {
+                    cell.valueLabel.text = "\(value)"
+                    cell.valueLabel.textColor = UIColor.blackColor()
+                }
+            } else {
+                cell.valueLabel.text = "\(value)"
+                cell.valueLabel.textColor = UIColor.blackColor()
+            }
         }
+        
         
         cell.backgroundColor = UIColor.whiteColor()
         

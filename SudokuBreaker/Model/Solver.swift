@@ -8,6 +8,17 @@
 
 import Foundation
 
+let emptySudoky = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
 struct Solver {
     
     var grid = [Array<Int>]()
@@ -160,7 +171,30 @@ struct Solver {
             return nil
         }
         
-        return (!isResolved) ? grid[line][column] : solutionGrid[line][column]
+        return grid[line][column]
+    }
+    
+    func solutionValueAtPosition(position: Int) -> Int? {
+        
+        if (!isResolved) { return nil }
+        
+        let line = position / 9
+        let column = position % 9
+        
+        if line >= grid.count || column >= grid[line].count {
+            return nil
+        }
+        
+        return solutionGrid[line][column]
+    }
+    
+    mutating func clearAll() {
+        
+        isResolved = false
+        isProcessing = false
+        
+        solutionGrid.removeAll()
+        grid = emptySudoky
     }
     
 }
