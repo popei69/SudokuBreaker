@@ -14,10 +14,15 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var solveButton: UIButton!
     
+    var settingsImageView = UIImageView()
+    
     var grid = [Array<Int>]()
-    var solver = Solver()
+    var solver = Solver() // clear
     
     var cellWidth : CGFloat = 50.0
+    
+    var selectedIndexPath : IndexPath?
+    var isGridLocked = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +40,15 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
             [0, 0, 0, 0, 8, 0, 0, 7, 9]]
 
         
-        self.solver = Solver(grid: sudokuToSolve)
+//        self.solver = Solver(grid: sudokuToSolve)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // define a square
         let width : CGFloat = self.view.frame.width - 40
-        heightConstraint.constant = width
+//        heightConstraint.constant = width
 
         cellWidth = (width - (8 * 5)) / 9
         let flowLayout = UICollectionViewFlowLayout()
@@ -51,30 +56,54 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
         gridCollectionView.setCollectionViewLayout(flowLayout, animated: false)
+        
+        settingsImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 35.0, height: 35.0))
     }
     
     
-    @IBAction func solveAction(sender: AnyObject) {
+    @IBAction func solveAction(_ sender: AnyObject) {
         
-        solveButton.enabled = false
+        solveButton.isEnabled = false
+        isGridLocked = true;
+        
+        startAnimation()
         
         // TODO: Dispatch on another thread
-        solver.findSolution()
-        
-        if solver.isResolved {
-            print("Success")
-            solver.isProcessing = false
-            self.grid = solver.solutionGrid
-            gridCollectionView.reloadData()
+        let resolutionQueue = DispatchQueue(label: "solution-queue")
+        resolutionQueue.async {
+            self.solver.findSolution()
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            
+            if self.solver.isResolved {
+                print("Success")
+                self.solver.isProcessing = false
+                self.grid = self.solver.solutionGrid
+                self.gridCollectionView.reloadData()
+            }
+        })
     }
     
-    @IBAction func clearAction(sender: AnyObject) {
+    @IBAction func clearAction(_ sender: AnyObject) {
         
         solver.clearAll()
         self.grid = solver.grid
         gridCollectionView.reloadData()
-        solveButton.enabled = true
+        solveButton.isEnabled = true
+    }
+    
+    @IBAction func updateValueAction(_ sender:AnyObject) {
+        
+        if let selectedIndexPath = selectedIndexPath,
+            let button = sender as? UIButton,
+            let currentTitle = button.currentTitle,
+            let newValue = Int(currentTitle),
+            !isGridLocked {
+            
+            solver.setValueAtPosition(selectedIndexPath.row, newValue: newValue)
+            self.gridCollectionView.reloadItems(at: [selectedIndexPath])
+        }
     }
     
 
@@ -90,42 +119,89 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // MARK: - Collection Delegate & DataSource
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         // hardcoded for now
         return 81
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GridCollectionCell", forIndexPath: indexPath) as! GridCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCollectionCell", for: indexPath) as! GridCollectionCell
         
         if let value = solver.valueAtPosition(indexPath.row) {
             
-            if solver.isResolved && value == 0 {
+            // if sudoku resolve
+            if solver.isResolved {
                 
-                if let solutionValue = solver.solutionValueAtPosition(indexPath.row) {
+                // get the resolved value
+                if let solutionValue = solver.solutionValueAtPosition(indexPath.row), value == 0 {
                     cell.valueLabel.text = "\(solutionValue)"
-                    cell.valueLabel.textColor = UIColor.redColor()
+                    cell.valueLabel.textColor = UIColor.red
                 } else {
                     cell.valueLabel.text = "\(value)"
-                    cell.valueLabel.textColor = UIColor.blackColor()
+                    cell.valueLabel.textColor = UIColor.black
                 }
+                
             } else {
-                cell.valueLabel.text = "\(value)"
-                cell.valueLabel.textColor = UIColor.blackColor()
+                
+                if value != 0 {
+                    cell.valueLabel.text = "\(value)"
+                    cell.valueLabel.textColor = UIColor.black
+                } else {
+                    cell.valueLabel.text = ""
+                }
             }
         }
         
+        if let selectedIndexPath = selectedIndexPath, selectedIndexPath == indexPath {
+            cell.valueLabel.layer.borderColor = UIColor.red.cgColor
+            cell.valueLabel.layer.borderWidth = 2
+        } else {
+            cell.backgroundColor = UIColor.white
+            cell.valueLabel.layer.borderWidth = 0
+        }
         
-        cell.backgroundColor = UIColor.whiteColor()
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var tmpIndexPaths : [IndexPath] = [indexPath]
+        if let oldIndexPath = selectedIndexPath {
+            tmpIndexPaths.append(oldIndexPath)
+        }
+        selectedIndexPath = indexPath
+        collectionView.reloadItems(at: tmpIndexPaths)
+    }
+    
+    
+    // MARK: - Animation
+    
+    func startAnimation() {
+        
+        settingsImageView.image = UIImage(named: "settings")
+        settingsImageView.center = self.view.center
+        
+        self.view.addSubview(settingsImageView)
+        
+        UIView.animate(withDuration: 2.0, animations: {
+            self.settingsImageView.transform = self.settingsImageView.transform.rotated(by: CGFloat(M_PI));
+        }, completion: { result in
+            self.settingsImageView.removeFromSuperview()
+        })
+    }
+    
+    func stopAnimation() {
+        
+    }
+    
+    
 
     /*
     // MARK: - Navigation

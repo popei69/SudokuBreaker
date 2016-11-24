@@ -16,6 +16,7 @@
 		140FEE501D2DB557006CEA3C /* Solver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FEE491D2DB557006CEA3C /* Solver.swift */; };
 		14D5F0091D35914B0059F516 /* SudokuBreakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5F0081D35914B0059F516 /* SudokuBreakerTests.swift */; };
 		14D5F0101D3591BC0059F516 /* Solver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FEE491D2DB557006CEA3C /* Solver.swift */; };
+		14DF691F1DE7859700E35AF7 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF691E1DE7859700E35AF7 /* ColorUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		14D5F0061D35914B0059F516 /* SudokuBreakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuBreakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D5F0081D35914B0059F516 /* SudokuBreakerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuBreakerTests.swift; sourceTree = "<group>"; };
 		14D5F00A1D35914B0059F516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14DF691E1DE7859700E35AF7 /* ColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorUtils.swift; path = SudokuBreaker/Utils/ColorUtils.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				140FEE461D2DB557006CEA3C /* Design */,
 				140FEE481D2DB557006CEA3C /* Model */,
 				140FEE2C1D2D9F89006CEA3C /* Info.plist */,
+				14DF691E1DE7859700E35AF7 /* ColorUtils.swift */,
 			);
 			name = SudokuBreaker;
 			path = SudokuSolver;
@@ -190,9 +193,11 @@
 				TargetAttributes = {
 					140FEE1C1D2D9F89006CEA3C = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 					};
 					14D5F0051D35914B0059F516 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 140FEE1C1D2D9F89006CEA3C;
 					};
 				};
@@ -242,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140FEE4E1D2DB557006CEA3C /* GridViewController.swift in Sources */,
+				14DF691F1DE7859700E35AF7 /* ColorUtils.swift in Sources */,
 				140FEE4F1D2DB557006CEA3C /* GridCollectionCell.swift in Sources */,
 				140FEE501D2DB557006CEA3C /* Solver.swift in Sources */,
 				140FEE4A1D2DB557006CEA3C /* AppDelegate.swift in Sources */,
@@ -324,7 +330,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -363,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -376,11 +382,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SudokuBreaker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.benoitpasquier.SudokuBreaker;
 				PRODUCT_NAME = SudokuBreaker;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -390,10 +397,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SudokuBreaker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.benoitpasquier.SudokuBreaker;
 				PRODUCT_NAME = SudokuBreaker;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -405,6 +413,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.benoitpasquier.SudokuBreakerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SudokuBreaker.app/SudokuBreaker";
 			};
 			name = Debug;
@@ -417,6 +426,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.benoitpasquier.SudokuBreakerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SudokuBreaker.app/SudokuBreaker";
 			};
 			name = Release;
@@ -449,6 +459,7 @@
 				14D5F00E1D35914B0059F516 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

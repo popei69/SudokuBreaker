@@ -28,14 +28,14 @@ struct Solver {
     var isProcessing = false
     
     init() {
-        
+        self.grid = emptySudoky
     }
     
     init(grid: [Array<Int>]) {
         self.grid = grid
     }
     
-    private func printGrid(grid: [Array<Int>]) -> Void {
+    fileprivate func printGrid(_ grid: [Array<Int>]) -> Void {
         
         print(" --------------- Start ----------------")
         
@@ -54,7 +54,7 @@ struct Solver {
         print(" ---------------- Stop ----------------")
     }
     
-    private func isNumberInGridColumn(grid:[Array<Int>], column:Int, valueToSearch:Int) -> Bool {
+    fileprivate func isNumberInGridColumn(_ grid:[Array<Int>], column:Int, valueToSearch:Int) -> Bool {
         
         if grid.count == 0 {
             return false
@@ -74,7 +74,7 @@ struct Solver {
         return false
     }
     
-    private func isNumberInGridLine(grid:[Array<Int>], line:Int, valueToSearch:Int) -> Bool {
+    fileprivate func isNumberInGridLine(_ grid:[Array<Int>], line:Int, valueToSearch:Int) -> Bool {
         
         if grid.count == 0 || line >= grid.count {
             return false
@@ -83,7 +83,7 @@ struct Solver {
         return grid[line].contains(valueToSearch)
     }
     
-    private func isNumberInSubGrid(grid:[Array<Int>], line:Int, column:Int, valueToSearch:Int) -> Bool {
+    fileprivate func isNumberInSubGrid(_ grid:[Array<Int>], line:Int, column:Int, valueToSearch:Int) -> Bool {
         
         if grid.count == 0 || line >= grid.count || column >= grid[line].count {
             return false
@@ -105,7 +105,7 @@ struct Solver {
         return false
     }
     
-    private mutating func backtrack(grid:[Array<Int>], line:Int, column: Int) -> Bool {
+    fileprivate mutating func backtrack(_ grid:[Array<Int>], line:Int, column: Int) -> Bool {
         
         var tmpColumn = column
         var tmpLine = line
@@ -162,7 +162,7 @@ struct Solver {
         self.backtrack(self.grid, line: 0, column: 0)
     }
     
-    func valueAtPosition(position: Int) -> Int? {
+    func valueAtPosition(_ position: Int) -> Int? {
         
         let line = position / 9
         let column = position % 9
@@ -174,7 +174,18 @@ struct Solver {
         return grid[line][column]
     }
     
-    func solutionValueAtPosition(position: Int) -> Int? {
+    mutating func setValueAtPosition(_ position: Int, newValue: Int) -> Void {
+        let line = position / 9
+        let column = position % 9
+        
+        if line >= grid.count || column >= grid[line].count {
+            return
+        }
+        
+        grid[line][column] = newValue
+    }
+    
+    func solutionValueAtPosition(_ position: Int) -> Int? {
         
         if (!isResolved) { return nil }
         
