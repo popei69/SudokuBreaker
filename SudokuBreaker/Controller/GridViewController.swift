@@ -166,6 +166,9 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.valueLabel.layer.borderWidth = 0
         }
         
+        if isPositionColored(position: indexPath.row) {
+            cell.backgroundColor = UIColor.green
+        }
         
         return cell
     }
@@ -178,6 +181,18 @@ class GridViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         selectedIndexPath = indexPath
         collectionView.reloadItems(at: tmpIndexPaths)
+    }
+    
+    func isPositionColored(position: Int) -> Bool {
+        
+        let line = position / 9
+        let column = position % 9
+        
+        
+        // if column in 3..5 && line not in 3..5 -> colored
+        // if column not in 3..5 && line 3..5 -> colored
+        return ((column >= 3 && column <= 5) && (line < 3 || line > 5)) ||
+            ((line >= 3 && line <= 5) && (column < 3 || column > 5))
     }
     
     
